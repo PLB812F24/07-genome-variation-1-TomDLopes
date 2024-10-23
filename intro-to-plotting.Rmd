@@ -38,7 +38,7 @@ First research question: How much does flipper length vary in our penguin datase
 Here is some code we can use to make a histogram:
 ```{r}
 ggplot(penguins, aes(x=flipper_length_mm)) + #information about the dataset
-geom_histogram(binwidth=1) #the type of plot we want to make
+geom_histogram(binwidth=3) #the type of plot we want to make
 ```
 
 Note that in the geom_histogram() function, we set the width of the histogram bins as 1. Try editing the code to adjust the width of the histogram bins. Keep the code with the bin width that you think is 'best'.
@@ -47,7 +47,7 @@ This graph is kind of ugly. One of the fun parts of making plots is that you can
 
 ```{r}
 ggplot(penguins, aes(x = flipper_length_mm)) + #information about the dataset
-  geom_histogram(binwidth=1, color = "white", fill="navy") + #make the figure
+  geom_histogram(binwidth=2, color = "magenta", fill="brown") + #make the figure
   labs(x = "Flipper Length (mm)", y = "Frequency") + #add labels
 theme_minimal() #get rid of the default gray background
 
@@ -57,7 +57,7 @@ This dataset contains information about species as well. Do flipper lengths diff
 
 ```{r}
 ggplot(penguins, aes(x = flipper_length_mm, fill = species)) +
-  geom_histogram(colour = "black")
+  geom_histogram(color = "black")
 
 ```
 
@@ -103,25 +103,36 @@ Now that you've worked through the tutorial, here are some homework questions.
 1A) Make a histogram of body mass (body_mass_g). Choose the colors and labels that you like best
 
 ```{r}
-
+ggplot (penguins, aes(x=body_mass_g, fill = species)) +
+        geom_histogram (binwidth = 80) +
+        labs (x = "Body mass (g)", y = "Frequency")
 ```
 
 1B) Make density plot that compares body mass across different species.
 
 ```{r}
-
+ggplot (penguins, aes(x=body_mass_g, fill = species)) +
+        geom_density (alpha = 0.65) +
+        labs (x = "Body mass (g)", y = "Frequency") + 
+        scale_fill_manual (values = c("springgreen", "limegreen", "forestgreen"))
 ```
 
 2A) Create a scatterplot of bill depth (x) and flipper length (y) colored by species.
 
 ```{r}
-
+ggplot (penguins, aes(x = bill_depth_mm, y = flipper_length_mm, color = species)) +
+  geom_point () +
+  labs (x = "Bill depth (mm)", y = "Flipper length (mm)") 
 ```
 
 2B) What happens when you color the data points by body mass (body_mass_g) instead of species?
 
 ```{r}
-
+ggplot (penguins, aes(x = bill_depth_mm, y = flipper_length_mm, color = body_mass_g,)) +
+  geom_point (size = 7.777) +
+  labs (x = "Bill depth (mm)", y = "Flipper length (mm)") +
+  scale_color_gradient (low = "springgreen", high = "black")
+  #scale_color_manual (values = c("springgreen", "turquoise"))
 
 ```
 
